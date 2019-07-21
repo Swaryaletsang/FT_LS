@@ -8,7 +8,7 @@ void ft_ls()
     
 
     current_dir = opendir(".");
-    while(r = readdir(current_dir))
+    while((r = readdir(current_dir)))
     {
 		if(r->d_name[0] != '.')
 		{
