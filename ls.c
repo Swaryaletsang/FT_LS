@@ -1,7 +1,4 @@
-void    ls()
-{
-    
-}
+#include "ft_ls.h"
 
 int    is_option(char c)
 {
@@ -41,6 +38,7 @@ int     main(int argc, char **argv)
         char *flags;
         char *final_flags;
         int i;
+        char err;
         
         flags = ft_strdup("artRl");
         final_flags = ft_strnew(1);
@@ -59,15 +57,17 @@ int     main(int argc, char **argv)
         }
         if ((check_options(flags, final_flags)) == (ft_strlen(final_flags)) - 1)
         {
-            //lists
+            ft_putstr("hello im listing");
         }
         else
         {
+            err = error_flag(flags, final_flags);
             ft_putstr("ls: illegal option -- ");
-            //ft_putchar();
+            ft_putchar(err);
             ft_putchar('\n');
             ft_putendl("usage: ls [-Ralrt] [file ...]");
         }
         
     }
+    return (0);
 }

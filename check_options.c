@@ -21,3 +21,32 @@ int		check_options(char *s,  char *s2)
     }
 	return(count);
 }
+
+char	error_flag(char *s, char *s1)
+{
+	int i;
+	int count;
+    int x;
+	int p;
+
+    x = 0;
+	count = 0;
+	p = 0;
+    while (s1[x] != '\0')
+    {
+        i = 0;
+	    while (s[i] != '\0')
+	    {
+		    if (s[i] == s1[x])
+			    count++;
+		    i++;
+	    }
+		
+		if (s[i] == '\0' && p == count)
+			return ((char)s1[x]);
+		// not return well check pontsho or others tomorrow
+		p = count;
+        x++;
+    }
+	return ('-');
+}
