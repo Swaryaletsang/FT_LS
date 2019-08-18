@@ -29,7 +29,7 @@ char	error_flag(char *s, char *s1)
     int x;
 	int p;
 
-    x = 0;
+    x = 1;
 	count = 0;
 	p = 0;
     while (s1[x] != '\0')
@@ -42,9 +42,8 @@ char	error_flag(char *s, char *s1)
 		    i++;
 	    }
 		
-		if (s[i] == '\0' && p == count)
-			return ((char)s1[x]);
-		// not return well check pontsho or others tomorrow
+		if (p == count)
+			return(s1[x]);
 		p = count;
         x++;
     }

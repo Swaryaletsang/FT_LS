@@ -1,4 +1,5 @@
 #include "libft.h"
+int		ft_timecmp(struct timespec *ts1, struct timespec *ts2);
 
 t_list      *ft_sort_list(t_list *lst, int (*compare)(void *, void *))
 {
@@ -22,6 +23,10 @@ t_list      *ft_sort_list(t_list *lst, int (*compare)(void *, void *))
     }
     lst = temp;
     return (lst);
+}
+int     comptime(void *s1, void *s2)
+{
+    
 }
 int     compare(void *s1, void *s2)
 {
@@ -69,7 +74,7 @@ int     main(void)
     ft_lstiter(mylist, &display_list);
     ft_putchar('\n');
     ft_putendl("POSIBLY SORTED LIST");
-    t_list *newlst = ft_sort_list(mylist,&compare);
+    t_list *newlst = ft_sort_list(mylist,&ft_timecmp);
     ft_lstiter(newlst, &display_list);
     ft_putendl("REVERSED SORTED LIST");
     ft_lst_rev(newlst);

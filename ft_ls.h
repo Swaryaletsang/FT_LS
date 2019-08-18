@@ -15,4 +15,5 @@ void        ft_ls();
 int		ft_timecmp(struct timespec *ts1, struct timespec *ts2);
 char	error_flag(char *s, char *s1);
 int		check_options(char *s,  char *s2);
+int     compare(void *s1, void *s2);
 #endif

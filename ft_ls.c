@@ -15,8 +15,6 @@ void ft_ls()
 			ft_putstr(r->d_name);
 			ft_putchar(' ');
 			ft_putchar(' ');
-		}
-
 	}
     closedir(current_dir);
 }

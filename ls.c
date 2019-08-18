@@ -31,6 +31,11 @@ int    is_flag(char c)
     return (0);
 }
 
+t_list  *parsed_lst(char const *content, size_t content_size)
+{
+    t_list *parsed_lst;
+}
+
 int     main(int argc, char **argv)
 {
     if (argc > 1)
@@ -46,28 +51,35 @@ int     main(int argc, char **argv)
         while (i < argc)
         {
             if (is_flag(argv[i][0]) == 1)
-            {
                 final_flags = ft_strcat(final_flags, argv[i]++);
-            }
             else
-            {
                 break ;
-            }
             i++;
         }
-        if ((check_options(flags, final_flags)) == (ft_strlen(final_flags)) - 1)
+        if (i < argc)
+        {
+          t_list *parsed_lst;
+          t_list *sort;
+
+          parsed_lst =ft_lstnew(argv[i], ft_strlen(argv[i]));
+          while (++i < argc)
+          {
+              ft_lstadd(&parsed_lst, ft_lstnew(argv[i], ft_strlen(argv[i])));
+          }
+          sort = ft_sort_list(parsed_lst, &compare);
+        }
+        if ((check_options(flags, final_flags)) == (int)(ft_strlen(final_flags)) - 1)
         {
             ft_putstr("hello im listing");
         }
         else
         {
             err = error_flag(flags, final_flags);
-            ft_putstr("ls: illegal option -- ");
+            ft_putstr("ft_ls: illegal option -- ");
             ft_putchar(err);
             ft_putchar('\n');
-            ft_putendl("usage: ls [-Ralrt] [file ...]");
-        }
-        
+            ft_putendl("usage: ft_ls [-Ralrt] [file ...]");
+        }  
     }
     return (0);
 }
