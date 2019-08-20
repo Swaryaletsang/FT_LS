@@ -31,9 +31,63 @@ int    is_flag(char c)
     return (0);
 }
 
-t_list  *parsed_lst(char const *content, size_t content_size)
+void    ft_lstdir(t_list *dir)
 {
-    t_list *parsed_lst;
+    t_list *list;
+    t_list *sort_list;
+
+    list = NULL;
+    while (dir)
+    {
+        ft_putendl(dir->content);
+        current_dir = opendir((char *)dir->content);
+        while((r = readdir(current_dir)))
+        {
+		    if(r->d_name[0] != '.')
+		    {
+			    ft_lstadd(&list, ft_lstnew(r->d_name, ft_strlen(r->d_name) + 1));
+            }
+	    }
+        sort_list = ft_sort_list(list, &compare);
+        ft_lstiter(sort_list, &display_list);
+        ft_lstdel(&list, &del);
+        ft_putchar('\n');
+        dir = dir->next;
+    }
+        closedir(current_dir);
+}
+
+void    print_parse_f_d(t_list *lst)
+{
+    t_list *dir;
+    t_list *files;
+    
+    dir = NULL;
+    files = NULL;
+    while(lst)
+    {
+        if ((stat(lst->content, &stats)) == 0)
+        {
+            if (S_ISDIR(stats.st_mode))
+                ft_lstadd(&dir, ft_lstnew(lst->content, ft_strlen(lst->content) + 1));
+	        if (S_ISREG(stats.st_mode))
+                ft_lstadd(&files, ft_lstnew(lst->content, ft_strlen(lst->content) + 1));
+        }
+        else
+        {
+            ft_putstr("ft_ls: ");
+            ft_putstr(lst->content);
+            ft_putendl(": No such file or directory");
+        }
+        lst = lst->next;
+    }
+    ft_lstiter(files, &display_list);
+    if (dir != NULL)
+    {
+        ft_putchar('\n');
+
+        ft_lstdir(dir);
+    }
 }
 
 int     main(int argc, char **argv)
@@ -44,6 +98,7 @@ int     main(int argc, char **argv)
         char *final_flags;
         int i;
         char err;
+        t_list *sort_parsed;
         
         flags = ft_strdup("artRl");
         final_flags = ft_strnew(1);
@@ -59,27 +114,29 @@ int     main(int argc, char **argv)
         if (i < argc)
         {
           t_list *parsed_lst;
-          t_list *sort;
 
           parsed_lst =ft_lstnew(argv[i], ft_strlen(argv[i]));
           while (++i < argc)
           {
               ft_lstadd(&parsed_lst, ft_lstnew(argv[i], ft_strlen(argv[i])));
           }
-          sort = ft_sort_list(parsed_lst, &compare);
+          sort_parsed = ft_sort_list(parsed_lst, &compare);
+          //ft_lstdel(&parsed_lst, &del);
+          //ft_lstdel(&sort_parsed, &del);
         }
-        if ((check_options(flags, final_flags)) == (int)(ft_strlen(final_flags)) - 1)
+        print_parse_f_d(sort_parsed);
+        /*if ((check_options(flags, final_flags)) == (int)(ft_strlen(final_flags)) - 1)
         {
             ft_putstr("hello im listing");
         }
         else
         {
-            err = error_flag(flags, final_flags);
-            ft_putstr("ft_ls: illegal option -- ");
-            ft_putchar(err);
-            ft_putchar('\n');
-            ft_putendl("usage: ft_ls [-Ralrt] [file ...]");
-        }  
+             err = error_flag(flags, final_flags);
+             ft_putstr("ft_ls: illegal option -- ");
+             ft_putchar(err);
+             ft_putchar('\n');
+             ft_putendl("usage: ft_ls [-Ralrt] [file ...]");
+         } */ 
     }
     return (0);
 }

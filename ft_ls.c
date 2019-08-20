@@ -3,10 +3,6 @@
 
 void ft_ls()
 {
-    DIR *current_dir;
-    struct dirent *r;
-    
-
     current_dir = opendir(".");
     while((r = readdir(current_dir)))
     {

@@ -47,5 +47,5 @@ char	error_flag(char *s, char *s1)
 		p = count;
         x++;
     }
-	return ('-');
+	return (' ');
 }
