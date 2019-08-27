@@ -22,6 +22,7 @@ int		check_options(char *s,  char *s2)
 	return(count);
 }
 
+
 char	error_flag(char *s, char *s1)
 {
 	int i;
@@ -48,4 +49,23 @@ char	error_flag(char *s, char *s1)
         x++;
     }
 	return (' ');
+}
+
+void	ls_with_flags(char *s1, char *s2)
+{
+	char err;
+	
+	if ((check_options(s1, s2)) == (int)(ft_strlen(s2)) - 1)
+        {
+            ft_putstr("hello im listing");
+        }
+        else
+        {
+             err = error_flag(s1, s2);
+             ft_putstr("ft_ls: illegal option -- ");
+             ft_putchar(err);
+             ft_putchar('\n');
+             ft_putendl("usage: ft_ls [-Ralrt] [file ...]");
+			 return ;
+         } 
 }

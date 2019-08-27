@@ -22,4 +22,6 @@ void    print_parse_f_d(t_list *lst);
 t_list      *ft_sort_list(t_list *lst, int (*compare)(void *, void *));
 void	del(void *content, size_t size);
 void    display_list(t_list *elem);
+void    ft_list_parsed_dir(t_list *dir);
+void	ls_with_flags(char *s1, char *s2);
 #endif
