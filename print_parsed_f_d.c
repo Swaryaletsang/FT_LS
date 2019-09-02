@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 13:40:47 by atau              #+#    #+#             */
-/*   Updated: 2019/09/01 18:17:59 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/02 16:40:59 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_parsed_f_d(t_list *lst, char *flags)
 	temp = NULL;
 	while (lst)
 	{
-		if ((stat(lst->content, &stats)) == 0)
+		if ((lstat(lst->content, &stats)) == 0)
 		{
 			if (S_ISDIR(stats.st_mode))
 				ft_lstadd(&dir, ft_lstnew(lst->content, ft_strlen(lst->content) + 1));
@@ -47,7 +47,8 @@ void	print_parsed_f_d(t_list *lst, char *flags)
 		}
 		lst = lst->next;
 	}
-	ft_finally_print(files, flags);
+	if (files != NULL)
+		ft_finally_print(files, flags);
 	if (dir != NULL)
 	{
 		temp = ft_sort_list(dir, &compare);

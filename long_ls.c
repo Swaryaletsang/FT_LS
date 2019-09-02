@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 11:29:25 by atau              #+#    #+#             */
-/*   Updated: 2019/08/31 18:10:04 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/02 18:51:03 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void			long_ls(char *path)
 	char *s;
 	char *s1;
 
-	if ((stat(path, &stats)) == 0)
+	if ((lstat(path, &stats)) == -1)
 	{
 		permisions1();
 		ft_putchar(' ');

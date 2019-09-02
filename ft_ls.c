@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 12:51:50 by atau              #+#    #+#             */
-/*   Updated: 2019/09/01 18:21:33 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/02 14:34:49 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			main(int argc, char **argv)
 	t_list *parsed_lst;
 
 	parsed_lst = NULL;
-	if (argc == 2 && ft_strcmp("--", argv[1]) == 0)
+	if (argc == 2 && (ft_strcmp("--", argv[1])) == 0)
 	{
 		just_ls();
 		return (0);
@@ -66,7 +66,7 @@ int			main(int argc, char **argv)
 				{
 					i++;
 					break ;
-			}
+				}
 				if (i == 1)
 					final_flags = ft_strcat(final_flags, argv[i]);
 				else
@@ -85,11 +85,18 @@ int			main(int argc, char **argv)
 			}
 			sort_parsed = ft_sort_list(parsed_lst, &compare);
 		}
-		ft_putendl(final_flags);
-		if (ft_strlen(final_flags) > 0 && sort_parsed == NULL)
-			ls_with_flags(flags, final_flags);
+		//ft_putendl(final_flags);
+		//ft_lstiter(sort_parsed, &display_list);
+		//ft_putchar('\n');
+		if (final_flags[0] != '\0' && sort_parsed == NULL)
+		{
+			ls_with_flags(flags, final_flags); ft_putendl("im here");
+		}
 		else
+		{
 			print_parsed_f_d(sort_parsed, final_flags);
+			ft_putendl("fuck");
+		}
 	}
 	else
 		just_ls();

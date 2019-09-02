@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 12:15:09 by atau              #+#    #+#             */
-/*   Updated: 2019/09/01 13:26:28 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/02 16:59:03 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void		set_time(char *file_a, char *file_b, struct timespec *a,\
 {
 	struct stat		info;
 
-	stat(file_a, &info);
+	lstat(file_a, &info);
 	*a = info.st_mtimespec;
-	stat(file_b, &info);
+	lstat(file_b, &info);
 	*b = info.st_mtimespec;
 }
 

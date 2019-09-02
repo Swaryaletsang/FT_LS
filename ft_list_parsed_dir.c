@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 15:30:54 by atau              #+#    #+#             */
-/*   Updated: 2019/09/01 18:13:07 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/02 14:52:49 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void	ft_list_parsed_dir(t_list *dir, char *flags)
 		ft_lstdel(&list, &del);
 		ft_putchar('\n');
 		dir = dir->next;
+		closedir(current_dir);
 	}
-	closedir(current_dir);
 }
