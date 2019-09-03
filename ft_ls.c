@@ -89,14 +89,9 @@ int			main(int argc, char **argv)
 		//ft_lstiter(sort_parsed, &display_list);
 		//ft_putchar('\n');
 		if (final_flags[0] != '\0' && sort_parsed == NULL)
-		{
-			ls_with_flags(flags, final_flags); ft_putendl("im here");
-		}
+			ls_with_flags(flags, final_flags);
 		else
-		{
 			print_parsed_f_d(sort_parsed, final_flags);
-			ft_putendl("fuck");
-		}
 	}
 	else
 		just_ls();

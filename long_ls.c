@@ -73,7 +73,7 @@ void			long_ls(char *path)
 	char *s;
 	char *s1;
 
-	if ((lstat(path, &stats)) == -1)
+	if ((lstat(path, &stats)) == 0)
 	{
 		permisions1();
 		ft_putchar(' ');
@@ -93,4 +93,10 @@ void			long_ls(char *path)
 		format(r[2], ' ');
 		format(path, '\n');
 	}
+	else
+	{
+		ft_putstr("ERROR reading files stat ->");
+		ft_putendl(path);
+	}
+	
 }

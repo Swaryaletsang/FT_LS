@@ -26,6 +26,7 @@ struct group	*grp;
 struct dirent	*r;
 
 void			long_ls(char *path);
+int			is_option(char c, char *str);
 int				ft_timecmp(struct timespec *ts1, struct timespec *ts2);
 int				compare(void *s1, void *s2);
 t_list			*ft_sort_time(t_list *lst,\
