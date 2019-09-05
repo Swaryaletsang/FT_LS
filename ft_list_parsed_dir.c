@@ -44,7 +44,10 @@ static t_list		*creat_lst_dir(char *directory, char *option)
 void	ft_list_parsed_dir(t_list *dir, char *flags)
 {
 	t_list *list;
-	//t_list *sort_list;
+	//t_list *new_list;
+	//char *new;
+	//char *temp;
+
 	//DIR *current_dir;
 
 	list = NULL;
@@ -63,8 +66,15 @@ void	ft_list_parsed_dir(t_list *dir, char *flags)
 		// }
 		// sort_list = ft_sort_list(list, &compare);
 		list = creat_lst_dir(dir->content, flags);
-		ft_finally_print(list, flags);
-		//ft_lstdel(&list, &del);
+		// while (list)
+		// {
+		// 	temp = ft_strjoin(dir->content, "/");
+		// 	new = ft_strjoin(temp, list->content);
+		// 	ft_lstadd(&new_list, ft_lstnew(new, ft_strlen(new) + 1));
+		// 	list = list->next;
+		// }
+		ft_finally_print(list, flags, (char *)dir->content);
+		ft_lstdel(&list, &del);
 		ft_putchar('\n');
 		dir = dir->next;
 		//closedir(current_dir);

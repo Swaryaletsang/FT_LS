@@ -63,18 +63,21 @@ static t_list		*the_lst(char *option)
 	closedir(current_dir);
 }
 
-static void			print_l(t_list *list)
+static void			print_l(t_list *list, char *s)
 {
 	while (list)
 	{
-		long_ls((char *)list->content);
+		
+		long_ls((char *)list->content, s);
 		list = list->next;
 	}
 }
 
-void				ft_finally_print(t_list *list, char *final_flags)
+void				ft_finally_print(t_list *list, char *final_flags, char *dir_path)
 {
 	t_list *head;
+	// ft_lstiter(list, &display_list);
+	// ft_putchar('\n');
 
 	if (list == NULL)
 		list = the_lst(final_flags);
@@ -84,7 +87,7 @@ void				ft_finally_print(t_list *list, char *final_flags)
 		{
 			if (is_option('t', final_flags) != 0)
 			{
-				head = ft_sort_time(list, &ft_timecmp);
+				head = ft_sort_time(list, &ft_timecmp, dir_path);
 				list = head;
 			}
 			if (is_option('r', final_flags) != 0)
@@ -94,7 +97,7 @@ void				ft_finally_print(t_list *list, char *final_flags)
 			}
 		}
 		if (is_option('l', final_flags) != 0)
-			print_l(list);
+			print_l(list, dir_path);
 		else
 			ft_lstiter(list, &display_list);
 		//if (is_option('R', final_flags) != 0)

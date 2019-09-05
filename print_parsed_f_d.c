@@ -48,7 +48,7 @@ void	print_parsed_f_d(t_list *lst, char *flags)
 		lst = lst->next;
 	}
 	if (files != NULL)
-		ft_finally_print(files, flags);
+		ft_finally_print(files, flags, NULL);
 	if (dir != NULL)
 	{
 		temp = ft_sort_list(dir, &compare);

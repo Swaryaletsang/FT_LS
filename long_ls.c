@@ -67,13 +67,34 @@ static void		permisions1(void)
 	permisions2();
 }
 
-void			long_ls(char *path)
+static int		has_slash(char *s, char c)
+{
+	while (*s)
+	{
+		if (*s == c)
+			return (1);
+		s++;
+	}
+	return (0);
+}
+
+void			long_ls(char *path, char *dir_path)
 {
 	char **r;
 	char *s;
 	char *s1;
-
-	if ((lstat(path, &stats)) == 0)
+	char *path_content;
+	char *temp;
+	if (ft_strlen(dir_path) > 1)
+	{
+		temp = ft_strjoin(dir_path, "/");
+		path_content = ft_strjoin(temp, path);
+		//free(temp);
+	}
+	else
+		path_content = path;
+	
+	if ((lstat(path_content, &stats)) == 0)
 	{
 		permisions1();
 		ft_putchar(' ');
@@ -97,6 +118,5 @@ void			long_ls(char *path)
 	{
 		ft_putstr("ERROR reading files stat ->");
 		ft_putendl(path);
-	}
-	
+	}	
 }
