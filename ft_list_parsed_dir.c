@@ -41,42 +41,40 @@ static t_list		*creat_lst_dir(char *directory, char *option)
 	closedir(current_dir);
 }
 
+static int	ft_list_size(t_list *begin_list)
+{
+	t_list *list;
+	int index; 
+	
+	index = 0;
+	list = begin_list;
+	while (list)
+	{
+		index++;
+		list = list->next;
+	}
+	return (index);
+}
+
 void	ft_list_parsed_dir(t_list *dir, char *flags)
 {
 	t_list *list;
-	//t_list *new_list;
-	//char *new;
-	//char *temp;
+	int		size;
 
-	//DIR *current_dir;
-
+	size = ft_list_size(dir);
 	list = NULL;
 	while (dir)
 	{
-		ft_putstr(dir->content);
-		ft_putendl(":");
-		// current_dir = opendir((char *)dir->content);
-		// while ((r = readdir(current_dir)))
-		// {
-		// 	if (r->d_name[0] != '.')
-		// 	{
-		// 		ft_lstadd(&list, ft_lstnew(r->d_name,\
-		// 					ft_strlen(r->d_name) + 1));
-		//  	}	
-		// }
-		// sort_list = ft_sort_list(list, &compare);
+		if (size > 1)
+		{
+			ft_putstr(dir->content);
+			ft_putendl(":");
+		}
 		list = creat_lst_dir(dir->content, flags);
-		// while (list)
-		// {
-		// 	temp = ft_strjoin(dir->content, "/");
-		// 	new = ft_strjoin(temp, list->content);
-		// 	ft_lstadd(&new_list, ft_lstnew(new, ft_strlen(new) + 1));
-		// 	list = list->next;
-		// }
 		ft_finally_print(list, flags, (char *)dir->content);
 		ft_lstdel(&list, &del);
-		ft_putchar('\n');
+		if (dir->next != NULL)
+			ft_putchar('\n');
 		dir = dir->next;
-		//closedir(current_dir);
 	}
 }

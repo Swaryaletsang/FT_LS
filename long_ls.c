@@ -50,6 +50,8 @@ static void		permisions1(void)
 {
 	if (S_ISDIR(stats.st_mode))
 		ft_putchar('d');
+	else if (S_ISLNK(stats.st_mode))
+		ft_putchar('l');
 	else
 		ft_putchar('-');
 	if (stats.st_mode & S_IRUSR)
@@ -67,15 +69,24 @@ static void		permisions1(void)
 	permisions2();
 }
 
-static int		has_slash(char *s, char c)
+// static int		has_slash(char *s, char c)
+// {
+// 	while (*s)
+// 	{
+// 		if (*s == c)
+// 			return (1);
+// 		s++;
+// 	}
+// 	return (0);
+// }
+static void		ft_putlink(char *path)
 {
-	while (*s)
-	{
-		if (*s == c)
-			return (1);
-		s++;
-	}
-	return (0);
+	char buf[256];
+	ssize_t len; 
+	
+	len = readlink(path , buf, 255);
+	buf[len] = '\0';
+	ft_putstr(buf);
 }
 
 void			long_ls(char *path, char *dir_path)
@@ -85,11 +96,11 @@ void			long_ls(char *path, char *dir_path)
 	char *s1;
 	char *path_content;
 	char *temp;
-	if (ft_strlen(dir_path) > 1)
+	if (dir_path != NULL)
 	{
 		temp = ft_strjoin(dir_path, "/");
 		path_content = ft_strjoin(temp, path);
-		//free(temp);
+		free(temp);
 	}
 	else
 		path_content = path;
@@ -112,11 +123,12 @@ void			long_ls(char *path, char *dir_path)
 		format(r[1], ' ');
 		format(r[0], ' ');
 		format(r[2], ' ');
-		format(path, '\n');
+		ft_putstr(path);
+		if (S_ISLNK(stats.st_mode))
+		{
+			ft_putstr(" -> ");
+			ft_putlink(path_content);
+		}
+		ft_putchar('\n');
 	}
-	else
-	{
-		ft_putstr("ERROR reading files stat ->");
-		ft_putendl(path);
-	}	
 }

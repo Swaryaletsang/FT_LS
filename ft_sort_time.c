@@ -15,12 +15,16 @@
 static char		*get_the_path(char *parent, char *con)
 {
 	char *s1;
-	char * temp;
+	char *temp;
 
-	temp = ft_strjoin(parent, "/");
-	s1 = ft_strjoin(temp, con);
-	free(temp);
-	return (s1);
+	if (parent != NULL)
+	{
+		temp = ft_strjoin(parent, "/");
+		s1 = ft_strjoin(temp, con);
+		free(temp);
+		return (s1);
+	}
+	return (con);
 }
 
 static void		set_time(char *file_a, char *file_b, struct timespec *a,\
@@ -45,7 +49,6 @@ t_list			*ft_sort_time(t_list *lst,\
 	char *con_next;
 
 	temp = lst;
-
 	while (lst->next != NULL)
 	{
 		con = get_the_path(path, (char *)lst->content);
@@ -61,8 +64,6 @@ t_list			*ft_sort_time(t_list *lst,\
 		else
 			lst = lst->next;
 	}
-	ft_strdel(&con);
-	ft_strdel(&con_next);
 	lst = temp;
 	return (lst);
 }
