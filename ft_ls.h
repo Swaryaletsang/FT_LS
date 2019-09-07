@@ -18,6 +18,7 @@
 # include <pwd.h>
 # include <time.h>
 # include <sys/stat.h>
+#include <sys/xattr.h>
 # include "libft/libft.h"
 
 struct stat		stats;
@@ -25,6 +26,8 @@ struct passwd	*user;
 struct group	*grp;
 struct dirent	*r;
 
+void        recurse(t_list *list, char *options);
+t_list		*creat_lst_dir(char *directory, char *option);
 void			long_ls(char *path, char *dir_path);
 int			is_option(char c, char *str);
 int				ft_timecmp(struct timespec *ts1, struct timespec *ts2);

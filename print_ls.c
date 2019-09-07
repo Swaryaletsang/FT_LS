@@ -63,21 +63,73 @@ static t_list		*the_lst(char *option)
 	closedir(current_dir);
 }
 
+static char			*full_path(char *content, char *path)
+{
+	char *path_content;
+	char *temp;
+	if (path != NULL)
+	{
+		temp = ft_strjoin(path, "/");
+		path_content = ft_strjoin(temp, content);
+		free(temp);
+	}
+	else
+		path_content = content;
+	return (path_content);
+}
+static void			ext_attr(char *path)
+{
+	char chr;
+	ssize_t xattr;
+
+	xattr = 0;
+	xattr = listxattr(path, NULL, 0, XATTR_NOFOLLOW);
+    if (xattr < 0)
+        xattr = 0;
+
+    if (xattr > 0)
+        chr = '@';
+    else
+        chr = ' ';
+	ft_putchar(chr);
+	ft_putchar(' ');
+}
 static void			print_l(t_list *list, char *s)
 {
+	int total;
+	t_list *head;
+	char *final_path;
+
+	total = 0;
+	head = list;
+	if (s == NULL)
+		s = ft_strdup(".");
+	lstat(s, &stats);
+	if (S_ISDIR(stats.st_mode))
+	{
+		while (list)
+		{
+			final_path = full_path(list->content, s);
+			if ((lstat(final_path, &stats)) == 0)
+				total += stats.st_blocks;
+			list = list->next;
+		}
+		ft_putstr("total ");
+		ft_putnbr(total);
+		ft_putchar('\n');
+	}
+	list = head;
 	while (list)
 	{
-		
 		long_ls((char *)list->content, s);
 		list = list->next;
 	}
+	ft_strdel(&s);
 }
 
 void				ft_finally_print(t_list *list, char *final_flags, char *dir_path)
 {
 	t_list *head;
-	// ft_lstiter(list, &display_list);
-	// ft_putchar('\n');
 
 	if (list == NULL)
 		list = the_lst(final_flags);
@@ -100,11 +152,10 @@ void				ft_finally_print(t_list *list, char *final_flags, char *dir_path)
 			print_l(list, dir_path);
 		else
 			ft_lstiter(list, &display_list);
-		//if (is_option('R', final_flags) != 0)
-		//{
-		//	char *path;
-		//	path = get_directory(list);
-		//	ft_recurse(path);
-		//}
+	}
+	if (is_option('R', final_flags) != 0)
+	{
+		recurse(list, final_flags);
+		ft_putchar('\n');
 	}
 }
