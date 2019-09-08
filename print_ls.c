@@ -6,35 +6,13 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 10:58:55 by atau              #+#    #+#             */
-/*   Updated: 2019/09/02 14:56:42 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/08 15:45:19 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-// static int			is_option(char c, char *str)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (str[i] != '\0')
-// 	{
-// 		if (c == str[i] && c == 'a')
-// 			return (1);
-// 		if (c == str[i] && c == 'r')
-// 			return (2);
-// 		if (c == str[i] && c == 't')
-// 			return (3);
-// 		if (c == str[i] && c == 'l')
-// 			return (4);
-// 		if (c == str[i] && c == 'R')
-// 			return (5);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-static t_list		*the_lst(char *option)
+static t_list	*the_lst(char *option)
 {
 	t_list	*ls_list;
 	t_list	*sort_ls;
@@ -63,61 +41,34 @@ static t_list		*the_lst(char *option)
 	closedir(current_dir);
 }
 
-static char			*full_path(char *content, char *path)
+static void		put_total(t_list *list, char *s)
 {
-	char *path_content;
-	char *temp;
-	if (path != NULL)
-	{
-		temp = ft_strjoin(path, "/");
-		path_content = ft_strjoin(temp, content);
-		free(temp);
-	}
-	else
-		path_content = content;
-	return (path_content);
-}
-static void			ext_attr(char *path)
-{
-	char chr;
-	ssize_t xattr;
-
-	xattr = 0;
-	xattr = listxattr(path, NULL, 0, XATTR_NOFOLLOW);
-    if (xattr < 0)
-        xattr = 0;
-
-    if (xattr > 0)
-        chr = '@';
-    else
-        chr = ' ';
-	ft_putchar(chr);
-	ft_putchar(' ');
-}
-static void			print_l(t_list *list, char *s)
-{
-	int total;
-	t_list *head;
-	char *final_path;
+	int		total;
+	char	*final_path;
 
 	total = 0;
+	while (list)
+	{
+		final_path = full_path(list->content, s);
+		if ((lstat(final_path, &stats)) == 0)
+			total += stats.st_blocks;
+		list = list->next;
+	}
+	ft_putstr("total ");
+	ft_putnbr(total);
+	ft_putchar('\n');
+}
+
+static void		print_l(t_list *list, char *s)
+{
+	t_list *head;
+
 	head = list;
 	if (s == NULL)
 		s = ft_strdup(".");
 	lstat(s, &stats);
 	if (S_ISDIR(stats.st_mode))
-	{
-		while (list)
-		{
-			final_path = full_path(list->content, s);
-			if ((lstat(final_path, &stats)) == 0)
-				total += stats.st_blocks;
-			list = list->next;
-		}
-		ft_putstr("total ");
-		ft_putnbr(total);
-		ft_putchar('\n');
-	}
+		put_total(list, s);
 	list = head;
 	while (list)
 	{
@@ -127,35 +78,37 @@ static void			print_l(t_list *list, char *s)
 	ft_strdel(&s);
 }
 
-void				ft_finally_print(t_list *list, char *final_flags, char *dir_path)
+static t_list	*ft_do_t_r(t_list *list, char *final_flags, char *dir_path)
 {
 	t_list *head;
 
+	if (is_option('t', final_flags) != 0)
+	{
+		head = ft_sort_time(list, &ft_timecmp, dir_path);
+		list = head;
+	}
+	if (is_option('r', final_flags) != 0)
+	{
+		head = ft_lst_rev(list);
+		list = head;
+	}
+	return (list);
+}
+
+void			ft_finally_print(t_list *list, char *final_flags,\
+		char *dir_path)
+{
 	if (list == NULL)
 		list = the_lst(final_flags);
 	if (list)
 	{
 		if (final_flags)
-		{
-			if (is_option('t', final_flags) != 0)
-			{
-				head = ft_sort_time(list, &ft_timecmp, dir_path);
-				list = head;
-			}
-			if (is_option('r', final_flags) != 0)
-			{
-				head = ft_lst_rev(list);
-				list = head;
-			}
-		}
+			list = ft_do_t_r(list, final_flags, dir_path);
 		if (is_option('l', final_flags) != 0)
 			print_l(list, dir_path);
 		else
 			ft_lstiter(list, &display_list);
 	}
 	if (is_option('R', final_flags) != 0)
-	{
 		recurse(list, final_flags);
-		ft_putchar('\n');
-	}
 }

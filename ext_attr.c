@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_option.c                                        :+:      :+:    :+:   */
+/*   ext_attr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/08 15:45:56 by atau              #+#    #+#             */
-/*   Updated: 2019/09/08 15:46:43 by atau             ###   ########.fr       */
+/*   Created: 2019/09/08 15:59:22 by atau              #+#    #+#             */
+/*   Updated: 2019/09/08 16:00:39 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int			is_option(char c, char *str)
+void		ext_attr(char *path)
 {
-	int i;
+	char	chr;
+	ssize_t	xattr;
 
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (c == str[i] && c == 'a')
-			return (1);
-		if (c == str[i] && c == 'r')
-			return (2);
-		if (c == str[i] && c == 't')
-			return (3);
-		if (c == str[i] && c == 'l')
-			return (4);
-		if (c == str[i] && c == 'R')
-			return (5);
-		i++;
-	}
-	return (0);
+	xattr = 0;
+	xattr = listxattr(path, NULL, 0, XATTR_NOFOLLOW);
+	if (xattr < 0)
+		xattr = 0;
+	if (xattr > 0)
+		chr = '@';
+	else
+		chr = ' ';
+	ft_putchar(chr);
+	ft_putchar(' ');
 }

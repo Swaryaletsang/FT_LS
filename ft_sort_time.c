@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 12:15:09 by atau              #+#    #+#             */
-/*   Updated: 2019/09/02 16:59:03 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/08 15:51:20 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ static void		set_time(char *file_a, char *file_b, struct timespec *a,\
 t_list			*ft_sort_time(t_list *lst,\
 		int (*time_compare)(struct timespec *, struct timespec *), char *path)
 {
-	t_list			*temp;
-	void			*swap;
-	struct timespec	time_a;
-	struct timespec	time_b;
-	char *con;
-	char *con_next;
+	t_list		*temp;
+	void		*swap;
+	char		*con;
+	char		*con_next;
 
 	temp = lst;
 	while (lst->next != NULL)

@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 15:49:42 by atau              #+#    #+#             */
-/*   Updated: 2019/09/02 16:38:17 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/08 16:02:43 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,8 @@ static char		error_flag(char *s, char *s1)
 
 void			ls_with_flags(char *s1, char *s2)
 {
-	char err;
-
-	t_list *dummy;
+	char	err;
+	t_list	*dummy;
 
 	if ((check_options(s1, s2)) == (int)(ft_strlen(s2)) - 1)
 	{

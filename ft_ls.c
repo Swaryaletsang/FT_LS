@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 12:51:50 by atau              #+#    #+#             */
-/*   Updated: 2019/09/02 14:34:49 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/08 16:16:18 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,6 @@ int			main(int argc, char **argv)
 			}
 			sort_parsed = ft_sort_list(parsed_lst, &compare);
 		}
-		//ft_putendl(final_flags);
-		//ft_lstiter(sort_parsed, &display_list);
-		//ft_putchar('\n');
 		if (final_flags[0] != '\0' && sort_parsed == NULL)
 			ls_with_flags(flags, final_flags);
 		else
@@ -95,5 +92,6 @@ int			main(int argc, char **argv)
 	}
 	else
 		just_ls();
+	sleep(40);
 	return (0);
 }
