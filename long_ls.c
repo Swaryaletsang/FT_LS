@@ -70,42 +70,38 @@ static void		permisions1(char *path)
 	ext_attr(path);
 }
 
-static void		ft_putlink(char *path)
-{
-	char	buf[256];
-	ssize_t	len;
-
-	len = readlink(path, buf, 255);
-	buf[len] = '\0';
-	ft_putstr(buf);
-}
-
-void			long_ls(char *path, char *dir_path)
+static void		long_ls_contents(void)
 {
 	char **r;
 	char *s;
 	char *s1;
+
+	ft_putchar(' ');
+	ft_putnbr(stats.st_nlink);
+	ft_putchar(' ');
+	user = getpwuid(stats.st_uid);
+	format(user->pw_name, ' ');
+	grp = getgrgid(stats.st_gid);
+	format(grp->gr_name, ' ');
+	ft_putnbr(stats.st_size);
+	ft_putchar(' ');
+	s = ft_strdup(ctime(&stats.st_mtime));
+	s1 = ft_strsub(s, 4, 12);
+	r = ft_strsplit(s1, ' ');
+	format(r[1], ' ');
+	format(r[0], ' ');
+	format(r[2], ' ');
+}
+
+void			long_ls(char *path, char *dir_path)
+{
 	char *path_content;
 
 	path_content = full_path(path, dir_path);
 	if ((lstat(path_content, &stats)) == 0)
 	{
 		permisions1(path_content);
-		ft_putchar(' ');
-		ft_putnbr(stats.st_nlink);
-		ft_putchar(' ');
-		user = getpwuid(stats.st_uid);
-		format(user->pw_name, ' ');
-		grp = getgrgid(stats.st_gid);
-		format(grp->gr_name, ' ');
-		ft_putnbr(stats.st_size);
-		ft_putchar(' ');
-		s = ft_strdup(ctime(&stats.st_mtime));
-		s1 = ft_strsub(s, 4, 12);
-		r = ft_strsplit(s1, ' ');
-		format(r[1], ' ');
-		format(r[0], ' ');
-		format(r[2], ' ');
+		long_ls_contents();
 		ft_putstr(path);
 		if (S_ISLNK(stats.st_mode))
 		{
