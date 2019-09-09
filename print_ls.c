@@ -110,5 +110,8 @@ void			ft_finally_print(t_list *list, char *final_flags,\
 			ft_lstiter(list, &display_list);
 	}
 	if (is_option('R', final_flags) != 0)
-		recurse(list, final_flags);
+	{
+		ft_putchar('\n');
+		recurse(list, final_flags, dir_path);
+	}
 }

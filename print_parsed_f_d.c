@@ -19,7 +19,7 @@ static void		ft_files_dir_error(char *s)
 
 	sorted_lst = NULL;
 	s2 = NULL;
-	ft_lstadd(&sorted_lst, ft_lstnew(s, ft_strlen(s) + 1));
+	ft_lstadd(&s2, ft_lstnew(s, ft_strlen(s) + 1));
 	sorted_lst = ft_sort_list(s2, &compare);
 	while (sorted_lst)
 	{

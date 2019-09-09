@@ -12,6 +12,16 @@
 
 #include "ft_ls.h"
 
+static int		has_slash(char *s, char c)
+{
+	int len;
+
+	len = ft_strlen(s) - 1;
+	if (s[len] == c)
+ 			return (1);
+ 	return (0);
+}
+
 char		*full_path(char *content, char *path)
 {
 	char *path_content;
@@ -19,9 +29,14 @@ char		*full_path(char *content, char *path)
 
 	if (path != NULL)
 	{
-		temp = ft_strjoin(path, "/");
-		path_content = ft_strjoin(temp, content);
-		free(temp);
+		if (has_slash(path, '/') == 0)
+		{
+			temp = ft_strjoin(path, "/");
+			path_content = ft_strjoin(temp, content);
+			free(temp);
+		}
+		else
+			path_content = ft_strjoin(path, content);
 	}
 	else
 		path_content = content;

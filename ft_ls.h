@@ -28,7 +28,7 @@ struct dirent	*r;
 struct timespec	time_a;
 struct timespec	time_b;
 
-void			recurse(t_list *list, char *options);
+void			recurse(t_list *list, char *options, char *path);
 void			ft_putlink(char *path);
 char			*full_path(char *content, char *path);
 void			ext_attr(char *path);

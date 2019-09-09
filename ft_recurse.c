@@ -1,49 +1,29 @@
 #include "ft_ls.h"
 
-// static int		has_slash(char *s, char c)
-// {
-// 	while (*s)
-// 	{
-// 		if (*s == c)
-// 			return (1);
-// 		s++;
-// 	}
-// 	return (0);
-// }
-
-// char        *get_directory(t_list *list)
-// {
-//     struct stat info;
-//     char    *is_dir;
-    
-//     while (list)
-//     {
-//         if (lstat(list->content, &info) == 0)
-//         {
-//             if (S_ISDIR(stats.st_mode))
-//             {
-//                 is_dir = ft_strdup(list->content);
-//             }
-//         }
-//     }
-// }
-
-void        recurse(t_list *list, char *options)
+void        recurse(t_list *list, char *options, char *path)
 {
     t_list *lst;
+    char *final_path;
+    char *directory;
 
+    if (path == NULL)
+        path = ft_strdup(".");
     lst = NULL;
     while (list)
     {
-        if (lstat(list->content, &stats) == 0)
+        final_path = full_path(list->content, path);
+        if (lstat(final_path, &stats) == 0)
         {
              if (S_ISDIR(stats.st_mode))
             {
-                lst = creat_lst_dir(list->content, options); 
-                ft_finally_print(lst, options, list->content);
-                ft_putchar('\n'); 
+                ft_putendl(list->content);
+                sleep(1);
+                lst = creat_lst_dir(final_path, options); 
+                ft_finally_print(lst, options, final_path);
+                ft_lstdel(&lst, &del);
             }
         }
+        ft_strdel(&final_path);
         list = list->next;
     }
     return ;
