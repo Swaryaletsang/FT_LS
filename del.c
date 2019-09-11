@@ -14,6 +14,9 @@
 
 void	del(void *content, size_t size)
 {
+	char *ptr;
+
 	(void)size;
-	free(content);
+	ptr = (char *)content;
+	ft_strdel(&ptr);
 }

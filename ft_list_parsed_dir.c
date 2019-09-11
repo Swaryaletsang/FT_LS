@@ -38,12 +38,11 @@ void		ft_list_parsed_dir(t_list *dir, char *flags)
 	{
 		if (size > 1)
 		{
-			ft_putstr(dir->content);
+			ft_putstr((char *)dir->content);
 			ft_putendl(":");
 		}
-		list = creat_lst_dir(dir->content, flags);
+		list = creat_lst_dir((char *)dir->content, flags);
 		ft_finally_print(list, flags, (char *)dir->content);
-		ft_lstdel(&list, &del);
 		if (dir->next != NULL)
 			ft_putchar('\n');
 		dir = dir->next;

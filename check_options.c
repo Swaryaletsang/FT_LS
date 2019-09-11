@@ -64,13 +64,9 @@ static char		error_flag(char *s, char *s1)
 void			ls_with_flags(char *s1, char *s2)
 {
 	char	err;
-	t_list	*dummy;
 
 	if ((check_options(s1, s2)) == (int)(ft_strlen(s2)) - 1)
-	{
-		dummy = NULL;
-		ft_finally_print(dummy, s2, NULL);
-	}
+		ft_finally_print(NULL, s2, NULL);
 	else
 	{
 		err = error_flag(s1, s2);
