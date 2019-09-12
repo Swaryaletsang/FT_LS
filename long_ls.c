@@ -95,6 +95,8 @@ static void		long_ls_contents(void)
 	i = 0;
 	while (r[i] != NULL)
 		ft_strdel(&(r[i++]));
+	free(r);
+	r = NULL;
 	ft_strdel(&s);
 	ft_strdel(&s1);
 }
@@ -115,6 +117,6 @@ void			long_ls(char *path, char *dir_path)
 			ft_putlink(path_content);
 		}
 		ft_putchar('\n');
-	}
+	} 
 	ft_strdel(&path_content);
 }

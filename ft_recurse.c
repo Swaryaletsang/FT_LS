@@ -20,7 +20,7 @@ void        recurse(t_list *list, char *options, char *path)
                 sleep(1);
                 lst = creat_lst_dir(final_path, options); 
                 ft_finally_print(lst, options, final_path);
-                ft_lstdel(&lst, &del);
+                //ft_lstdel(&lst, &del);
             }
         }
         ft_strdel(&final_path);
