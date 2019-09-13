@@ -113,6 +113,6 @@ int				main(int argc, char **argv)
 		do_ft_ls(argc, i, final_flags, argv);
 	else
 		just_ls();
-	sleep(70);
+	//sleep(70);
 	return (0);
 }

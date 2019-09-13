@@ -64,9 +64,18 @@ static char		error_flag(char *s, char *s1)
 void			ls_with_flags(char *s1, char *s2)
 {
 	char	err;
+	t_list *list;
 
+	list = NULL;
 	if ((check_options(s1, s2)) == (int)(ft_strlen(s2)) - 1)
 		ft_finally_print(NULL, s2, NULL);
+	if (is_option('R', s2) != 0)
+	{
+		ft_putchar('\n');
+		list = creat_lst_dir(".", s2);
+		recurse(list, s2, NULL);
+		ft_lstdel(&list, &del);
+	}
 	else
 	{
 		err = error_flag(s1, s2);

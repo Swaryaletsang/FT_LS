@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/10 14:13:58 by atau              #+#    #+#             */
-/*   Updated: 2019/09/10 14:15:19 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/13 14:10:14 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void		just_ls(void)
 	ft_lstiter(sort_ls, &display_list);
 	ft_putchar('\n');
 	closedir(current_dir);
-    ft_lstdel(&ls_list, &del);
+	ft_lstdel(&ls_list, &del);
 }

@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 11:29:25 by atau              #+#    #+#             */
-/*   Updated: 2019/09/10 14:28:20 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/13 13:56:11 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static void		permisions1(char *path)
 		ft_putchar('-');
 	permisions2();
 	ext_attr(path);
+	ft_putchar(' ');
 }
 
 static void		long_ls_contents(void)
@@ -77,7 +78,6 @@ static void		long_ls_contents(void)
 	char	*s1;
 	int		i;
 
-	ft_putchar(' ');
 	ft_putnbr(stats.st_nlink);
 	ft_putchar(' ');
 	user = getpwuid(stats.st_uid);
@@ -96,7 +96,6 @@ static void		long_ls_contents(void)
 	while (r[i] != NULL)
 		ft_strdel(&(r[i++]));
 	free(r);
-	r = NULL;
 	ft_strdel(&s);
 	ft_strdel(&s1);
 }
@@ -117,6 +116,6 @@ void			long_ls(char *path, char *dir_path)
 			ft_putlink(path_content);
 		}
 		ft_putchar('\n');
-	} 
+	}
 	ft_strdel(&path_content);
 }

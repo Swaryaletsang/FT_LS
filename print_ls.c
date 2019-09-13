@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 10:58:55 by atau              #+#    #+#             */
-/*   Updated: 2019/09/08 15:45:19 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/13 14:15:25 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,15 @@ void			ft_finally_print(t_list *list, char *final_flags,\
 		else
 			ft_lstiter(list, &display_list);
 	}
-	if (is_option('R', final_flags) != 0)
-	{
-		ft_putchar('\n');
-		recurse(list, final_flags, dir_path);
-	}
-	if (list)
-		ft_lstdel(&list, &del);
-	if (dir_path)
-		ft_strdel(&dir_path);
+	// if (is_option('R', final_flags) != 0)
+	// {
+	// 	ft_putchar('\n');
+	// 	recurse(list, final_flags, dir_path);
+	// 	ft_lstdel(&list, &del);
+	// 	ft_strdel(&dir_path);
+	// }
+	// if (list)
+	// 	ft_lstdel(&list, &del);
+	// if (dir_path)
+	// 	ft_strdel(&dir_path);
 }

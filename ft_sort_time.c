@@ -6,11 +6,17 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 12:15:09 by atau              #+#    #+#             */
-/*   Updated: 2019/09/08 15:51:20 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/13 14:06:23 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+static void		free_memory(char *s1, char *s2)
+{
+	ft_strdel(&s1);
+	ft_strdel(&s2);
+}
 
 static char		*get_the_path(char *parent, char *con)
 {
@@ -62,10 +68,7 @@ t_list			*ft_sort_time(t_list *lst,\
 		else
 			lst = lst->next;
 		if (path != NULL)
-		{
-			ft_strdel(&con);
-			ft_strdel(&con_next);
-		}
+			free_memory(con, con_next);
 	}
 	lst = temp;
 	return (lst);

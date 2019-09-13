@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/08 15:47:23 by atau              #+#    #+#             */
-/*   Updated: 2019/09/08 15:48:04 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/13 14:09:15 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ static int		has_slash(char *s, char c)
 
 	len = ft_strlen(s) - 1;
 	if (s[len] == c)
- 			return (1);
- 	return (0);
+		return (1);
+	return (0);
 }
 
-char		*full_path(char *content, char *path)
+char			*full_path(char *content, char *path)
 {
 	char *path_content;
 	char *temp;

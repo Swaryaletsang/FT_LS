@@ -43,6 +43,10 @@ void		ft_list_parsed_dir(t_list *dir, char *flags)
 		}
 		list = creat_lst_dir((char *)dir->content, flags);
 		ft_finally_print(list, flags, (char *)dir->content);
+		ft_putchar('\n');
+		if (is_option('R', flags) != 0)
+			recurse(list, flags, (char *)dir->content);
+			
 		if (dir->next != NULL)
 			ft_putchar('\n');
 		dir = dir->next;

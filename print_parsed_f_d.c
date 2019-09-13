@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 13:40:47 by atau              #+#    #+#             */
-/*   Updated: 2019/09/08 15:24:43 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/13 13:42:04 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ static void		ft_do_directories(t_list *directory, char *flags)
 	temp = NULL;
 	temp = ft_sort_list(directory, &compare);
 	ft_list_parsed_dir(temp, flags);
+	// while (temp)
+	// {
+	// 	free(temp);
+	// 	temp = temp->next;
+	// }
+	// temp = NULL;
 }
 
 void			print_parsed_f_d(t_list *lst, char *flags)
