@@ -63,7 +63,9 @@ static void		put_total(t_list *list, char *s)
 static void		print_l(t_list *list, char *s)
 {
 	t_list *head;
+	char *temp;
 
+	temp = ft_strdup(s);
 	head = list;
 	lstat(s, &stats);
 	if (S_ISDIR(stats.st_mode))
@@ -74,6 +76,7 @@ static void		print_l(t_list *list, char *s)
 		long_ls((char *)list->content, s);
 		list = list->next;
 	}
+	ft_strdel(*temp);
 }
 
 static t_list	*ft_do_t_r(t_list *list, char *final_flags, char *dir_path)
@@ -111,15 +114,8 @@ void			ft_finally_print(t_list *list, char *final_flags,\
 		else
 			ft_lstiter(list, &display_list);
 	}
-	// if (is_option('R', final_flags) != 0)
-	// {
-	// 	ft_putchar('\n');
-	// 	recurse(list, final_flags, dir_path);
-	// 	ft_lstdel(&list, &del);
-	// 	ft_strdel(&dir_path);
-	// }
-	// if (list)
-	// 	ft_lstdel(&list, &del);
-	// if (dir_path)
-	// 	ft_strdel(&dir_path);
+	if (list)
+		ft_lstdel(&list, &del);
+	if (dir_path && (is_option('R', final_flags) == 0))
+		ft_strdel(&dir_path);
 }

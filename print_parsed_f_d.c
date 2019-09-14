@@ -38,12 +38,12 @@ static void		ft_do_directories(t_list *directory, char *flags)
 	temp = NULL;
 	temp = ft_sort_list(directory, &compare);
 	ft_list_parsed_dir(temp, flags);
-	// while (temp)
-	// {
-	// 	free(temp);
-	// 	temp = temp->next;
-	// }
-	// temp = NULL;
+	 while (temp)
+	 {
+	 	free(temp);
+	 	temp = temp->next;
+	 }
+	 temp = NULL;
 }
 
 void			print_parsed_f_d(t_list *lst, char *flags)

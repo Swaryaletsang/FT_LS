@@ -65,7 +65,6 @@ void			ls_with_flags(char *s1, char *s2)
 {
 	char	err;
 	t_list *list;
-
 	list = NULL;
 	if ((check_options(s1, s2)) == (int)(ft_strlen(s2)) - 1)
 		ft_finally_print(NULL, s2, NULL);
@@ -75,6 +74,7 @@ void			ls_with_flags(char *s1, char *s2)
 		list = creat_lst_dir(".", s2);
 		recurse(list, s2, NULL);
 		ft_lstdel(&list, &del);
+		//sleep(70);
 	}
 	else
 	{
