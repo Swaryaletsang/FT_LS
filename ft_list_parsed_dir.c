@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/01 15:30:54 by atau              #+#    #+#             */
-/*   Updated: 2019/09/08 15:58:59 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/16 12:04:43 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ void		ft_list_parsed_dir(t_list *dir, char *flags)
 			ft_putendl(":");
 		}
 		list = creat_lst_dir((char *)dir->content, flags);
-		ft_finally_print(list, flags, (char *)dir->content);
+		if (list)
+			ft_finally_print(list, flags, (char *)dir->content);
 		ft_putchar('\n');
 		if (is_option('R', flags) != 0)
 		{
 			recurse(list, flags, (char *)dir->content);
 			ft_lstdel(&list, &del);
 		}
-			
 		if (dir->next != NULL)
 			ft_putchar('\n');
 		dir = dir->next;

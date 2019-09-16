@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 18:15:38 by atau              #+#    #+#             */
-/*   Updated: 2019/09/08 15:55:33 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/15 15:18:56 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/stat.h>
 # include <sys/xattr.h>
 # include "libft/libft.h"
+# include <stdio.h>
 
 struct stat		stats;
 struct passwd	*user;

@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:33:31 by atau              #+#    #+#             */
-/*   Updated: 2019/09/11 12:47:48 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/15 15:20:43 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,5 @@ int				main(int argc, char **argv)
 		do_ft_ls(argc, i, final_flags, argv);
 	else
 		just_ls();
-	//sleep(70);
 	return (0);
 }

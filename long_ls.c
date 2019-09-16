@@ -6,7 +6,7 @@
 /*   By: atau <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/24 11:29:25 by atau              #+#    #+#             */
-/*   Updated: 2019/09/13 13:56:11 by atau             ###   ########.fr       */
+/*   Updated: 2019/09/15 15:22:20 by atau             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ static void		permisions1(char *path)
 		ft_putchar('w');
 	else
 		ft_putchar('-');
-	if (stats.st_mode & S_IXUSR)
+	if (stats.st_mode & S_ISUID)
+		ft_putchar('S');
+	else if (stats.st_mode & S_IXUSR)
 		ft_putchar('x');
 	else
 		ft_putchar('-');
