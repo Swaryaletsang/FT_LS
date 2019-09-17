@@ -37,9 +37,9 @@ t_list		*creat_lst_dir(char *directory, char *option)
 		while ((r = readdir(current_dir)))
 			ft_lstadd(&ls_list, ft_lstnew(r->d_name, ft_strlen(r->d_name) + 1));
 	}
-	//sort_ls = ft_sort_list(ls_list, &compare); this needs to be fixed:
+	sort_ls = lst_sort_ascii(ls_list);//, &compare); this needs to be fixed:
 	closedir(current_dir);
-	return (ls_list);
+	return (sort_ls);
 	}
 	ft_putstr("ft_ls: ");
 	perror(directory);

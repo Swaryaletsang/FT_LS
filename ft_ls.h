@@ -49,6 +49,7 @@ void			display_list(t_list *elem);
 void			ft_list_parsed_dir(t_list *dir, char *flags);
 void			ls_with_flags(char *s1, char *s2);
 t_list			*ft_sort_list(t_list *lst, int (*compare)(void *, void *));
+t_list	*lst_sort_ascii(t_list *lst);
 void			ft_finally_print(t_list *list, char *final_flags,\
 		char *dir_path);
 
